@@ -22,13 +22,41 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
     controller = YoutubePlayerController(
       initialVideoId: widget.videoModel.id,
       flags: YoutubePlayerFlags(
-        autoPlay: true,
+        autoPlay: false,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        YoutubePlayer(
+          controller: controller!,
+          showVideoProgressIndicator: true,
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            "title",
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
+          ),
+        ),
+        const SizedBox(height: 16),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+
+    controller!.dispose();
   }
 }
