@@ -5,6 +5,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CustomYoutubePlayer extends StatefulWidget {
   final VideoModel videoModel;
+
   const CustomYoutubePlayer({
     required this.videoModel,
     super.key,
@@ -19,9 +20,11 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
 
   @override
   void initState() {
+    super.initState();
+
     controller = YoutubePlayerController(
       initialVideoId: widget.videoModel.id,
-      flags: YoutubePlayerFlags(
+      flags: const YoutubePlayerFlags(
         autoPlay: false,
       ),
     );
@@ -41,22 +44,15 @@ class _CustomYoutubePlayerState extends State<CustomYoutubePlayer> {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Text(
-            "title",
-            style: TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
-          ),
         ),
-        const SizedBox(height: 16),
       ],
     );
   }
 
   @override
   void dispose() {
+    controller?.dispose();
     // TODO: implement dispose
     super.dispose();
-
-    controller!.dispose();
   }
 }
